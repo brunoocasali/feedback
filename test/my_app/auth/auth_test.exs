@@ -6,9 +6,19 @@ defmodule FeedbackApp.AuthTest do
   describe "users" do
     alias FeedbackApp.Auth.User
 
-    @valid_attrs %{bio: "some bio", email: "some email", is_active: true, name: "some name", password: "some password"}
-    @update_attrs %{bio: "some updated bio", email: "some updated email", is_active: false, name: "some updated name", password: "some updated password"}
-    @invalid_attrs %{bio: nil, email: nil, is_active: nil, name: nil, password: nil}
+    @valid_attrs %{
+      bio: "some bio",
+      email: "some email",
+      name: "some name",
+      password: "some password"
+    }
+    @update_attrs %{
+      bio: "some updated bio",
+      email: "some updated email",
+      name: "some updated name",
+      password: "some updated password"
+    }
+    @invalid_attrs %{bio: nil, email: nil, name: nil, password: nil}
 
     def user_fixture(attrs \\ %{}) do
       {:ok, user} =
@@ -35,7 +45,6 @@ defmodule FeedbackApp.AuthTest do
       assert {:ok, %User{} = user} = Auth.create_user(@valid_attrs)
       assert user.bio == "some bio"
       assert user.email == "some email"
-      assert user.is_active == true
       assert user.name == "some name"
       assert Bcrypt.verify_pass("some password", user.password_hash)
     end
@@ -51,7 +60,6 @@ defmodule FeedbackApp.AuthTest do
       assert %User{} = user
       assert user.bio == "some updated bio"
       assert user.email == "some updated email"
-      assert user.is_active == false
       assert user.name == "some updated name"
       assert Bcrypt.verify_pass("some updated password", user.password_hash)
     end

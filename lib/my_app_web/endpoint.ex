@@ -35,6 +35,10 @@ defmodule FeedbackAppWeb.Endpoint do
     key: "_my_app_key",
     signing_salt: "Ck42Dbn8"
 
+  plug Corsica,
+    origins: "*",
+    log: [rejected: :error, invalid: :warn, accepted: :debug]
+
   plug FeedbackAppWeb.Router
 
   @doc """

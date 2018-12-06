@@ -7,7 +7,6 @@ defmodule FeedbackApp.Repo.Migrations.CreateUsers do
       add :name, :string
       add :bio, :text
       add :password_hash, :string
-      add :is_active, :boolean, default: false, null: false
 
       timestamps()
     end

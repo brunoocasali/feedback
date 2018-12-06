@@ -22,8 +22,8 @@ cd assets && npm install
 cd ..
 
 # Potentially Set up the database
-mix ecto.create
-mix ecto.migrate
+# mix ecto.create
+# mix ecto.migrate
 
 echo "\nTesting the installation..."
 # "Proove" that install was successful by running the tests
@@ -32,3 +32,8 @@ mix test
 echo "\n Launching Phoenix web server..."
 # Start the phoenix web server
 mix phx.server
+
+
+# curl -H "Content-Type: application/json" -X POST \
+# -d '{"email":"some@email.com","password":"some password"}' \
+# http://localhost:4000/api/users/sign_in -i

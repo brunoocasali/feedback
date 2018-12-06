@@ -2,31 +2,9 @@ defmodule FeedbackApp.Auth.User do
   use Ecto.Schema
   import Ecto.Changeset
 
-
-  schema "users" do
-
-
-    timestamps()
-  end
-
-  @doc false
-  def changeset(user, attrs) do
-    user
-    |> cast(attrs, [:email, :name, :bio, :is_active])
-    |> validate_required([:email, :name, :bio, :is_active])
-    |> unique_constraint(:email)
-  end
-end
-
-
-defmodule FeedbackApp.Auth.User do
-  use Ecto.Schema
-  import Ecto.Changeset
-
   schema "users" do
     field :bio, :string
     field :email, :string
-    field :is_active, :boolean, default: false
     field :name, :string
     field :password, :string, virtual: true
     field :password_hash, :string
@@ -37,8 +15,8 @@ defmodule FeedbackApp.Auth.User do
   @doc false
   def changeset(user, attrs) do
     user
-    |> cast(attrs, [:email, :name, :bio, :is_active, :password])
-    |> validate_required([:email, :name, :bio, :is_active, :password])
+    |> cast(attrs, [:email, :name, :bio, :password])
+    |> validate_required([:email, :name, :password])
     |> unique_constraint(:email)
     |> put_password_hash()
   end
