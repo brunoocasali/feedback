@@ -3,6 +3,12 @@ defmodule FeedbackAppWeb.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
+    plug Guardian.Plug.VerifyHeader
+    plug Guardian.Plug.LoadResource
+  end
+
+  pipeline :authenticated do
+    plug Guardian.Plug.EnsureAuthenticated
   end
 
   scope "/api", FeedbackAppWeb do
@@ -10,5 +16,10 @@ defmodule FeedbackAppWeb.Router do
 
     resources "/users", UserController, except: [:new, :edit]
     post "/users/sign_in", UserController, :sign_in
+
+    post "/sign_up", RegistrationController, :sign_up
+
+    pipe_through :authenticated
+    # resources "/feedbacks", FeedbackController, only: [:index, :create]
   end
 end
