@@ -40,6 +40,7 @@ defmodule FeedbackApp.Mixfile do
       {:gettext, "~> 0.11"},
       {:plug_cowboy, "~> 1.0"},
       {:bcrypt_elixir, "~> 1.0"},
+      {:guardian, "~> 0.14"},
       {:corsica, "~> 1.0"}
     ]
   end

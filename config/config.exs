@@ -18,6 +18,16 @@ config :my_app, FeedbackAppWeb.Endpoint,
   pubsub: [name: FeedbackApp.PubSub,
            adapter: Phoenix.PubSub.PG2]
 
+config :guardian, Guardian,
+  allowed_algos: ["HS512"], # optional
+  verify_module: Guardian.JWT,  # optional
+  issuer: "FeedbackApp",
+  ttl: { 30, :days },
+  allowed_drift: 2000,
+  verify_issuer: true, # optional
+  secret_key: "gNEguc6yk8CvVecRzlTshZmRnWg0BKOAxYgBnI37q4r3UdS6XehAFHIIai9ysU4Z",
+  serializer: FeedbackApp.GuardianSerializer
+
 # Configures Elixir's Logger
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",
